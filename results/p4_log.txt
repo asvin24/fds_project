@@ -1,0 +1,26 @@
+selected poly: M=9, s=None, alpha_hat=0.000631, beta_hat=31.6, logEv=-22.891
+selected gauss: M=25, s=0.15, alpha_hat=6.31, beta_hat=50.1, logEv=7.722
+
+=== Evidence & predictions under rescaling (alpha, beta held at their evidence optimum from the unscaled model) ===
+family               scaling  ev_base  ev_naive  ev_shift_naive  ev_naive_reopt_shift  max_dmu_naive_in  max_dmu_naive_ex  max_dsd_naive  rms_truth_base  rms_truth_naive
+  poly            uniform x3 -22.8914  -28.6130         -5.7217                0.0057            0.1979           53.0059         2.6467          0.1413           0.1580
+  poly     decay exp(-0.25m) -22.8914  -41.5818        -18.6904               -5.0315            1.3955          364.5742        24.9389          0.1413           0.1850
+  poly      grow exp(+0.25m) -22.8914  -27.4964         -4.6050                3.1543            0.2105           56.2088         2.8100          0.1413           0.1592
+  poly random lognormal(0,1) -22.8914  -25.1915         -2.3001               -1.6644            0.1765           46.5017         2.4302          0.1413           0.1303
+ gauss            uniform x3   7.7218    0.5292         -7.1927               -0.0726            0.0437            0.0961         0.4081          0.0776           0.0854
+ gauss     decay exp(-0.25m)   7.7218 -308.8086       -316.5304              -24.5610            0.8282            0.8552         0.1359          0.0776           0.3534
+ gauss      grow exp(+0.25m)   7.7218  -28.7977        -36.5196              -17.8047            0.4018            1.4083         1.5839          0.0776           0.0950
+ gauss random lognormal(0,1)   7.7218    0.8809         -6.8409               -5.3750            0.0589            0.4133         0.0464          0.0776           0.0725
+
+=== Transformed prior Lambda0 = alpha C^2 (and a non-diagonal T): deviations from the unscaled model ===
+family               scaling  inv_dev  inv_dmu  inv_dvar   inv_dm  invT_dev  invT_dmu
+  poly            uniform x3 1.28e-13 1.20e-11  9.09e-11 1.55e-12  4.19e-13  3.58e-12
+  poly     decay exp(-0.25m) 1.28e-13 6.54e-12  6.55e-11 9.52e-13  2.42e-13  4.72e-12
+  poly      grow exp(+0.25m) 2.27e-13 7.22e-12  5.37e-11 1.05e-12  4.26e-14  8.53e-12
+  poly random lognormal(0,1) 8.53e-14 3.75e-12  4.68e-11 3.63e-13  1.07e-13  5.06e-12
+ gauss            uniform x3 7.11e-15 7.77e-16  9.71e-17 1.28e-15  1.42e-14  6.11e-16
+ gauss     decay exp(-0.25m) 2.84e-14 6.66e-16  4.16e-17 1.78e-15  2.84e-14  6.94e-16
+ gauss      grow exp(+0.25m) 2.13e-14 6.11e-16  5.55e-17 1.22e-15  4.26e-14  1.80e-15
+ gauss random lognormal(0,1) 2.84e-14 4.44e-16  9.71e-17 9.16e-16  2.13e-14  6.66e-16
+
+Uniform scaling c=3: re-optimising alpha recovers the baseline evidence exactly (alpha -> alpha/9); non-uniform scalings cannot be fixed this way (see ev_naive_reopt_shift).

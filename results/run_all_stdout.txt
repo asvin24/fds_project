@@ -1,0 +1,282 @@
+== (a) well-conditioned check (N=40, M=6) ==
+log evidence  brute-force marginal N(0, I/b + PhiPhi'/a): -15.7443481736
+              QR -15.7443481736 | Cholesky -15.7443481736 | SVD-grid -15.7443481736
+max |m_QR - m_ref| = 2.22e-16; max |m_chol - m_ref| = 1.11e-16
+max |mu_QR - mu_ref| = 6.66e-16; max |var_QR - var_ref| = 6.94e-18
+MC predictive at x*=0.00: mean 0.0636 (formula 0.0644), var 0.05485 (formula 0.05479)
+
+== (b) accuracy vs 60-digit reference, monomials, alpha=1e-8 (nearly unregularised), N=60 ==
+  M  cond(Phi) | rel.err m_N:        QR  Cholesky    inv(A) | abs.err log-ev:        QR  Cholesky
+  4   8.96e+00 |                2.4e-16   1.4e-15   2.8e-15 |                   0.0e+00   2.8e-14
+  6   5.31e+01 |                2.5e-16   1.1e-14   4.0e-14 |                   2.8e-14   2.8e-14
+  8   3.11e+02 |                1.8e-14   3.0e-13   4.5e-13 |                   1.4e-14   7.1e-14
+ 10   1.61e+03 |                1.0e-14   7.8e-12   8.9e-12 |                   2.8e-14   1.5e-12
+ 12   1.08e+04 |                1.9e-13   4.8e-10   5.8e-10 |                   8.5e-14   9.3e-11
+ 14   6.67e+04 |                2.1e-12   9.3e-09   1.8e-08 |                   3.7e-13   6.0e-09
+ 16   3.90e+05 |                1.4e-11   2.1e-07   1.1e-07 |                   4.3e-14   3.9e-08
+ 18   2.44e+06 |                1.9e-11   9.5e-07   7.4e-07 |                   2.8e-13   3.8e-07
+ 20   1.45e+07 |                1.8e-11   9.2e-07   8.7e-07 |                   5.4e-13   1.7e-07
+
+== (c) SVD-grid evidence vs QR evidence on Part-2 bases: max |diff| = 2.77e-10 (so the grid searches below are exact) ==
+=== MAIN DATASET (seed 42, N=60, sigma=0.20, beta_true=25) ===
+[poly] Evidence : M= 9 s=None alpha=6.31e-04 beta=31.6 logEv=-22.89 | test MSE=0.01844
+[poly] CV fixed : M=11 s=None (alpha0=0.01, beta0=25.0) CV-MSE=0.0551 | test MSE=0.02369
+[poly] CV tuned : M= 9 s=None lambda=6.31e-05 CV-MSE=0.0439 | test MSE=0.01496
+[gauss] Evidence : M=25 s=0.15 alpha=6.31e+00 beta=50.1 logEv=7.72 | test MSE=0.00597
+[gauss] CV fixed : M=11 s=0.15 (alpha0=0.01, beta0=25.0) CV-MSE=0.0241 | test MSE=0.00697
+[gauss] CV tuned : M=11 s=0.15 lambda=6.31e-04 CV-MSE=0.0241 | test MSE=0.00681
+Gaussian evidence optimum: M=25, s=0.15, spacing Delta_mu=2/(M-2)=0.087, s/Delta_mu=1.73
+
+Poly: evidence-estimated beta per M (true 25):  M=1:1.6, M=2:4.0, M=3:4.0, M=4:7.9, M=5:10.0, M=6:10.0, M=7:12.6, M=8:12.6, M=9:31.6, M=10:31.6, M=11:31.6, M=12:31.6, M=13:25.1, M=14:25.1, M=15:39.8, M=16:39.8
+
+Condition numbers on the training inputs:
+  poly M=8: kappa=2.80e+02
+  poly M=12: kappa=1.06e+04
+  poly M=15: kappa=1.56e+05
+  poly M=16: kappa=3.85e+05
+  gauss M=15, s=0.25: kappa=6.14e+04
+  gauss M=25, s=0.25: kappa=6.58e+12
+  gauss M=25, s=0.65: kappa=1.66e+17
+
+Predictive std at x in [-1.5..1.5] for the evidence-selected models (shows variance behaviour outside data):
+   poly: x=[-1.5 -1.  -0.5  0.   0.5  1.   1.5] mu=[ 3.449e+02 -3.300e-01 -1.160e+00  2.300e-01  8.800e-01  5.600e-01
+  4.319e+02] sd=[53.52  0.29  0.19  0.19  0.18  0.41 66.61]; beta^-1/2=0.178, alpha^-1/2=39.8
+  gauss: x=[-1.5 -1.  -0.5  0.   0.5  1.   1.5] mu=[-0.09 -0.59 -1.08  0.4   0.92 -0.28 -0.09] sd=[0.28 0.18 0.16 0.16 0.15 0.18 0.28]; beta^-1/2=0.141, alpha^-1/2=0.4
+
+=== REPLICATES: 30 datasets (seeds 0..29) ===
+                  M_median  M_q25  M_q75  mse_median  mse_q25  mse_q75
+family criterion                                                      
+gauss  cv_fixed        8.0    8.0  10.00     0.00891  0.00580  0.01234
+       cv_tuned       10.0    8.0  12.00     0.00860  0.00612  0.01020
+       evidence        8.0    8.0  11.00     0.00740  0.00576  0.00879
+poly   cv_fixed       11.0   11.0  13.75     0.03322  0.02553  0.05580
+       cv_tuned       11.0   11.0  13.75     0.01679  0.00906  0.05595
+       evidence        7.0    7.0   9.00     0.06488  0.05893  0.07574
+
+Share of datasets where each criterion gives the lowest test MSE within a family:
+  poly: cv_fixed=0.13, cv_tuned=0.77, evidence=0.10
+  gauss: cv_fixed=0.23, cv_tuned=0.33, evidence=0.43
+Gaussian test-MSE < poly test-MSE (per criterion, share of datasets): evidence=1.00, cv_fixed=1.00, cv_tuned=0.87
+smooth done 5s
+sharp done 11s
+hetero done 16s
+=== PART 3: 30 replicate datasets per (dgp, sigma0, N, family); cells show MEDIAN [IQR] ===
+   dgp  sigma0   N family    M    s  noise_sd_hat  mse_in  nll_in  cov_in      mse_ex  nll_ex  cov_ex
+hetero    0.05  20  gauss 25.0 0.25        0.0540  0.0025 -0.9790  0.8764      0.6585  5.0180  0.5488
+hetero    0.05  20   poly  7.0  NaN        0.0649  0.0140 -0.8273  0.8611    448.6955 10.0249  0.2740
+hetero    0.05  60  gauss 15.0 0.25        0.0649  0.0006 -1.2191  0.9125      0.5971  5.5265  0.5403
+hetero    0.05  60   poly  9.0  NaN        0.0649  0.0011 -1.1918  0.9096    293.2875  4.7257  0.4828
+hetero    0.05 200  gauss 11.0 0.25        0.0649  0.0003 -1.2500  0.9248      0.5330  5.0940  0.5192
+hetero    0.05 200   poly  9.0  NaN        0.0649  0.0002 -1.2648  0.9262    317.9641  6.8334  0.2480
+hetero    0.20  20  gauss 27.0 0.25        0.2371  0.0374  0.3594  0.8422      0.7424  2.8247  0.6088
+hetero    0.20  20   poly  5.0  NaN        0.2853  0.1444  0.6309  0.8438     80.3912  6.3535  0.3773
+hetero    0.20  60  gauss 29.0 0.25        0.2371  0.0067  0.1554  0.9217      0.7183  2.8689  0.6307
+hetero    0.20  60   poly  7.0  NaN        0.2612  0.0161  0.1933  0.9166    287.4857  4.9645  0.4278
+hetero    0.20 200  gauss 25.0 0.25        0.2853  0.0033  0.1238  0.9208      0.7213  2.9140  0.6265
+hetero    0.20 200   poly  7.0  NaN        0.2853  0.0055  0.1501  0.9198    298.8480 11.7637  0.2302
+hetero    0.50  20  gauss 28.0 0.25        0.7197  0.1690  1.2164  0.8880      0.6894  1.8540  0.7963
+hetero    0.50  20   poly  2.5  NaN        0.7928  0.3719  1.3764  0.9232      4.3916  3.1731  0.7617
+hetero    0.50  60  gauss 29.0 0.25        0.7197  0.0474  1.0566  0.9250      0.7170  1.8254  0.8080
+hetero    0.50  60   poly  6.0  NaN        0.7197  0.1041  1.1025  0.9308     39.7157  3.8107  0.5803
+hetero    0.50 200  gauss 27.0 0.25        0.6589  0.0137  0.9954  0.9298      0.6742  1.7583  0.8090
+hetero    0.50 200   poly  9.0  NaN        0.7197  0.0325  1.0239  0.9291    393.7498  4.8784  0.5410
+ sharp    0.05  20  gauss 15.0 0.06        0.0540  0.0273  0.2144  0.8329      0.0938  1.3607  0.5228
+ sharp    0.05  20   poly  4.0  NaN        0.3433  0.1207  0.5871  0.9218      0.9112  1.5321  0.7140
+ sharp    0.05  60  gauss 23.0 0.06        0.0540  0.0026 -1.2458  0.9246      0.0929  1.4214  0.4835
+ sharp    0.05  60   poly  6.0  NaN        0.2853  0.0759  0.2136  0.9399      9.0134  2.7689  0.6225
+ sharp    0.05 200  gauss 29.0 0.06        0.0540  0.0005 -1.4999  0.9478      0.0908  1.8703  0.4323
+ sharp    0.05 200   poly 11.0  NaN        0.1971  0.0398 -0.1501  0.9294 106211.5444  9.3798  0.3198
+ sharp    0.20  20  gauss 13.0 0.12        0.2371  0.0783  0.4407  0.8787      0.0998  0.6959  0.8107
+ sharp    0.20  20   poly  2.0  NaN        0.3433  0.1897  0.7404  0.9193      0.9521  1.9099  0.6648
+ sharp    0.20  60  gauss 15.0 0.06        0.1971  0.0179  0.0316  0.9242      0.0931  0.6762  0.7943
+ sharp    0.20  60   poly  4.0  NaN        0.3433  0.0971  0.4291  0.9391      4.0052  3.2079  0.5458
+ sharp    0.20 200  gauss 21.0 0.06        0.1971  0.0057 -0.1086  0.9399      0.0907  0.6852  0.7582
+ sharp    0.20 200   poly  9.0  NaN        0.2853  0.0566  0.2499  0.9374   1827.7130  6.0905  0.4630
+ sharp    0.50  20  gauss 14.0 0.12        0.4971  0.1521  1.0276  0.8759      0.0950  0.9742  0.8758
+ sharp    0.50  20   poly  2.0  NaN        0.5981  0.2447  1.1049  0.9168      0.4196  1.3266  0.8767
+ sharp    0.50  60  gauss 13.0 0.12        0.4971  0.0737  0.8659  0.9446      0.0968  0.9128  0.9293
+ sharp    0.50  60   poly  4.0  NaN        0.5981  0.1195  0.9517  0.9456      1.0265  1.4869  0.8730
+ sharp    0.50 200  gauss 15.0 0.06        0.4971  0.0242  0.7774  0.9412      0.0916  0.9093  0.9140
+ sharp    0.50 200   poly  6.0  NaN        0.5981  0.0773  0.8753  0.9474     13.2621  2.7598  0.6187
+smooth    0.05  20  gauss 25.0 0.25        0.0540  0.0018 -1.3119  0.9310      0.6512  4.7271  0.4927
+smooth    0.05  20   poly  7.0  NaN        0.0649  0.0114 -0.9579  0.8868    344.1698  8.6969  0.2660
+smooth    0.05  60  gauss 11.0 0.25        0.0540  0.0005 -1.4623  0.9419      0.5759  5.7142  0.4833
+smooth    0.05  60   poly  9.0  NaN        0.0540  0.0007 -1.4457  0.9412    312.1738  4.2139  0.5357
+smooth    0.05 200  gauss 11.0 0.25        0.0540  0.0002 -1.5487  0.9534      0.4922  4.9517  0.4473
+smooth    0.05 200   poly  9.0  NaN        0.0540  0.0002 -1.5357  0.9556    314.9899  9.7115  0.1498
+smooth    0.20  20  gauss 27.0 0.25        0.1971  0.0134  0.0611  0.9177      0.7539  2.8522  0.5857
+smooth    0.20  20   poly  5.5  NaN        0.2371  0.1132  0.3674  0.8968    147.1914  5.7403  0.4458
+smooth    0.20  60  gauss 28.0 0.25        0.1971  0.0052 -0.1192  0.9467      0.6861  3.0884  0.5730
+smooth    0.20  60   poly  7.0  NaN        0.1971  0.0133 -0.0627  0.9395    400.4288  6.3050  0.3565
+smooth    0.20 200  gauss 24.0 0.25        0.1971  0.0015 -0.1724  0.9483      0.6539  3.2210  0.5875
+smooth    0.20 200   poly  7.0  NaN        0.1971  0.0033 -0.1618  0.9456    286.5530 17.3771  0.3353
+smooth    0.50  20  gauss 27.0 0.25        0.4971  0.1148  1.0306  0.8544      0.6998  2.0106  0.6778
+smooth    0.50  20   poly  4.0  NaN        0.5981  0.2381  1.1669  0.8902     15.4280  3.9449  0.5988
+smooth    0.50  60  gauss 26.0 0.25        0.4971  0.0237  0.7925  0.9427      0.7030  1.7280  0.7372
+smooth    0.50  60   poly  5.0  NaN        0.4971  0.0678  0.8686  0.9369     41.6403  5.9851  0.3793
+smooth    0.50 200  gauss 26.0 0.25        0.4971  0.0094  0.7532  0.9456      0.6736  1.8148  0.7310
+smooth    0.50 200   poly  8.0  NaN        0.4971  0.0170  0.7736  0.9448    324.3719  5.0907  0.4792
+
+--- Effect of N (median over sigma0 and replicates) ---
+M:
+N               20    60    200
+dgp    family                  
+hetero gauss   26.0  27.0  18.0
+       poly     7.0   7.0   9.0
+sharp  gauss   14.0  21.0  23.0
+       poly     3.0   4.0   9.0
+smooth gauss   27.0  25.0  15.0
+       poly     7.0   7.0   9.0
+mse_in:
+N                 20      60      200
+dgp    family                        
+hetero gauss   0.0374  0.0067  0.0033
+       poly    0.2054  0.0161  0.0055
+sharp  gauss   0.0848  0.0195  0.0057
+       poly    0.1898  0.0977  0.0566
+smooth gauss   0.0189  0.0052  0.0015
+       poly    0.1302  0.0142  0.0033
+nll_in:
+N                 20      60      200
+dgp    family                        
+hetero gauss   0.3972  0.1554  0.1238
+       poly    0.7129  0.1933  0.1501
+sharp  gauss   0.8202  0.0316 -0.1086
+       poly    0.7816  0.4357  0.2499
+smooth gauss   0.0611 -0.1192 -0.1724
+       poly    0.3718 -0.0627 -0.1618
+mse_ex:
+N                   20        60         200
+dgp    family                               
+hetero gauss     0.7013    0.6652     0.6184
+       poly    139.7771  208.8591   308.9455
+sharp  gauss     0.0954    0.0934     0.0908
+       poly      0.7402    3.8749  1745.1536
+smooth gauss     0.6806    0.6781     0.6077
+       poly    157.6687  191.0491   295.9904
+nll_ex:
+N                 20      60      200
+dgp    family                        
+hetero gauss   2.9574  2.6776  2.7861
+       poly    5.2851  4.4078  7.1664
+sharp  gauss   0.9604  0.9319  0.9161
+       poly    1.5706  2.4964  5.9618
+smooth gauss   2.9437  3.0179  3.1856
+       poly    5.7654  5.6503  7.2533
+
+--- Effect of sigma0 (median over N and replicates) ---
+M:
+sigma0         0.05  0.20  0.50
+dgp    family                  
+hetero gauss   13.0  27.0  27.0
+       poly     9.0   7.0   6.0
+sharp  gauss   23.0  21.0  15.0
+       poly     6.0   4.0   4.0
+smooth gauss   13.0  27.0  27.0
+       poly     9.0   7.0   5.5
+mse_in:
+sigma0           0.05    0.20    0.50
+dgp    family                        
+hetero gauss   0.0006  0.0073  0.0490
+       poly    0.0011  0.0167  0.1020
+sharp  gauss   0.0026  0.0179  0.0710
+       poly    0.0759  0.0966  0.1195
+smooth gauss   0.0005  0.0048  0.0274
+       poly    0.0006  0.0133  0.0678
+nll_in:
+sigma0           0.05    0.20    0.50
+dgp    family                        
+hetero gauss  -1.2049  0.1717  1.0676
+       poly   -1.1705  0.2403  1.1045
+sharp  gauss  -1.2458  0.0316  0.8676
+       poly    0.2136  0.4291  0.9517
+smooth gauss  -1.4582 -0.1088  0.8075
+       poly   -1.4401 -0.0627  0.8686
+mse_ex:
+sigma0             0.05      0.20     0.50
+dgp    family                             
+hetero gauss     0.5955    0.7254   0.6898
+       poly    335.7731  243.7848  43.0152
+sharp  gauss     0.0917    0.0927   0.0949
+       poly      9.7855    4.3297   2.0441
+smooth gauss     0.5725    0.6816   0.6992
+       poly    317.0836  283.9257  66.1817
+nll_ex:
+sigma0           0.05    0.20    0.50
+dgp    family                        
+hetero gauss   5.1006  2.8819  1.7932
+       poly    7.0801  6.5765  4.0108
+sharp  gauss   1.5868  0.6792  0.9284
+       poly    3.5711  3.3269  1.9188
+smooth gauss   4.9653  3.0901  1.7909
+       poly    7.7974  6.2575  5.0553
+
+--- Evidence-estimated noise sd vs truth (smooth, sharp: sigma0; hetero: rms of sigma(x) over U[-1,1]) ---
+sigma0=0.05: hetero rms sigma(x)=0.066; N=200 estimated sd -> hetero/gauss:0.065; hetero/poly:0.065; sharp/gauss:0.054; sharp/poly:0.197; smooth/gauss:0.054; smooth/poly:0.054
+sigma0=0.2: hetero rms sigma(x)=0.263; N=200 estimated sd -> hetero/gauss:0.285; hetero/poly:0.285; sharp/gauss:0.197; sharp/poly:0.285; smooth/gauss:0.197; smooth/poly:0.197
+sigma0=0.5: hetero rms sigma(x)=0.657; N=200 estimated sd -> hetero/gauss:0.659; hetero/poly:0.720; sharp/gauss:0.497; sharp/poly:0.598; smooth/gauss:0.497; smooth/poly:0.497
+
+--- Poly vs Gauss: share of replicates where Gaussian wins (lower), by dgp ---
+  mse_in: hetero=0.81, sharp=0.98, smooth=0.83
+  nll_in: hetero=0.74, sharp=0.91, smooth=0.80
+  mse_ex: hetero=1.00, sharp=0.98, smooth=1.00
+  nll_ex: hetero=0.87, sharp=0.92, smooth=0.85
+
+--- Hetero: 95% predictive-interval coverage on left (x<0) vs right (x>0) halves, N=200, sigma0=0.20 ---
+  poly: left coverage=1.00, right coverage=0.81, mean predictive sd left=0.241 (true 0.098), right=0.241 (true 0.352)
+  gauss: left coverage=0.99, right coverage=0.78, mean predictive sd left=0.241 (true 0.098), right=0.242 (true 0.352)
+selected poly: M=9, s=None, alpha_hat=0.000631, beta_hat=31.6, logEv=-22.891
+selected gauss: M=25, s=0.15, alpha_hat=6.31, beta_hat=50.1, logEv=7.722
+
+=== Evidence & predictions under rescaling (alpha, beta held at their evidence optimum from the unscaled model) ===
+family               scaling  ev_base  ev_naive  ev_shift_naive  ev_naive_reopt_shift  max_dmu_naive_in  max_dmu_naive_ex  max_dsd_naive  rms_truth_base  rms_truth_naive
+  poly            uniform x3 -22.8914  -28.6130         -5.7217                0.0057            0.1979           53.0059         2.6467          0.1413           0.1580
+  poly     decay exp(-0.25m) -22.8914  -41.5818        -18.6904               -5.0315            1.3955          364.5742        24.9389          0.1413           0.1850
+  poly      grow exp(+0.25m) -22.8914  -27.4964         -4.6050                3.1543            0.2105           56.2088         2.8100          0.1413           0.1592
+  poly random lognormal(0,1) -22.8914  -25.1915         -2.3001               -1.6644            0.1765           46.5017         2.4302          0.1413           0.1303
+ gauss            uniform x3   7.7218    0.5292         -7.1927               -0.0726            0.0437            0.0961         0.4081          0.0776           0.0854
+ gauss     decay exp(-0.25m)   7.7218 -308.8086       -316.5304              -24.5610            0.8282            0.8552         0.1359          0.0776           0.3534
+ gauss      grow exp(+0.25m)   7.7218  -28.7977        -36.5196              -17.8047            0.4018            1.4083         1.5839          0.0776           0.0950
+ gauss random lognormal(0,1)   7.7218    0.8809         -6.8409               -5.3750            0.0589            0.4133         0.0464          0.0776           0.0725
+
+=== Transformed prior Lambda0 = alpha C^2 (and a non-diagonal T): deviations from the unscaled model ===
+family               scaling  inv_dev  inv_dmu  inv_dvar   inv_dm  invT_dev  invT_dmu
+  poly            uniform x3 1.28e-13 1.20e-11  9.09e-11 1.55e-12  4.19e-13  3.58e-12
+  poly     decay exp(-0.25m) 1.28e-13 6.54e-12  6.55e-11 9.52e-13  2.42e-13  4.72e-12
+  poly      grow exp(+0.25m) 2.27e-13 7.22e-12  5.37e-11 1.05e-12  4.26e-14  8.53e-12
+  poly random lognormal(0,1) 8.53e-14 3.75e-12  4.68e-11 3.63e-13  1.07e-13  5.06e-12
+ gauss            uniform x3 7.11e-15 7.77e-16  9.71e-17 1.28e-15  1.42e-14  6.11e-16
+ gauss     decay exp(-0.25m) 2.84e-14 6.66e-16  4.16e-17 1.78e-15  2.84e-14  6.94e-16
+ gauss      grow exp(+0.25m) 2.13e-14 6.11e-16  5.55e-17 1.22e-15  4.26e-14  1.80e-15
+ gauss random lognormal(0,1) 2.84e-14 4.44e-16  9.71e-17 9.16e-16  2.13e-14  6.66e-16
+
+Uniform scaling c=3: re-optimising alpha recovers the baseline evidence exactly (alpha -> alpha/9); non-uniform scalings cannot be fixed this way (see ev_naive_reopt_shift).
+===== E1: prior-precision sweep (truth in class: M_true=10, N=60, sigma=0.15 known; R=100) =====
+E1 fixed alpha0=0.0001     M_ev= 4.09±0.64  M_cv= 9.10±2.54  dM=+5.01 [+4.49,+5.52]  P(cv>ev)=0.86 P(=)=0.14  sign p=2.6e-26  MSE ev/cv=0.02719/0.00748 (cv lower in 0.73)
+E1 fixed alpha0=0.001      M_ev= 4.57±1.73  M_cv= 9.10±2.54  dM=+4.53 [+3.97,+5.10]  P(cv>ev)=0.79 P(=)=0.21  sign p=3.3e-24  MSE ev/cv=0.02685/0.00748 (cv lower in 0.75)
+E1 fixed alpha0=0.01       M_ev= 5.29±2.45  M_cv= 9.19±2.61  dM=+3.90 [+3.20,+4.58]  P(cv>ev)=0.72 P(=)=0.25  sign p=3.7e-18  MSE ev/cv=0.02599/0.00748 (cv lower in 0.65)
+E1 fixed alpha0=0.1        M_ev= 6.93±2.95  M_cv= 9.35±2.43  dM=+2.42 [+1.63,+3.18]  P(cv>ev)=0.58 P(=)=0.32  sign p=2.4e-09  MSE ev/cv=0.02500/0.00747 (cv lower in 0.62)
+E1 fixed alpha0=1          M_ev= 8.52±2.50  M_cv= 9.69±2.39  dM=+1.17 [+0.48,+1.85]  P(cv>ev)=0.43 P(=)=0.44  sign p=7.3e-05  MSE ev/cv=0.00701/0.00758 (cv lower in 0.46)
+E1 fixed alpha0=10         M_ev= 9.87±0.88  M_cv= 9.20±2.69  dM=-0.67 [-1.23,-0.14]  P(cv>ev)=0.22 P(=)=0.57  sign p=1.0e+00  MSE ev/cv=0.00530/0.00712 (cv lower in 0.29)
+E1 fixed alpha0=100        M_ev=11.02±1.60  M_cv= 7.39±3.41  dM=-3.63 [-4.38,-2.89]  P(cv>ev)=0.11 P(=)=0.22  sign p=6.1e-11  MSE ev/cv=0.01422/0.02835 (cv lower in 0.46)
+E1 free (type-II ML)       M_ev= 9.37±1.92  M_cv=10.57±1.82  dM=+1.20 [+0.70,+1.72]  P(cv>ev)=0.43 P(=)=0.52  sign p=1.4e-08  MSE ev/cv=0.00579/0.00726 (cv lower in 0.39)
+
+===== E2: misspecification ablation (N=200, M in 1..30, alpha,beta / lambda free; R=100) =====
+B0 in-class + Gaussian (control) M_ev= 6.00±0.00  M_cv= 7.76±3.77  dM=+1.76 [+1.09,+2.55]  P(cv>ev)=0.36 P(=)=0.64  sign p=2.9e-11  MSE ev/cv=0.00007/0.00009 (cv lower in 0.32)
+B1 rough mean only         M_ev=12.70±2.06  M_cv=21.06±4.33  dM=+8.36 [+7.41,+9.31]  P(cv>ev)=0.97 P(=)=0.03  sign p=1.3e-29  MSE ev/cv=0.00103/0.00082 (cv lower in 0.62)
+B2 heavy-tail noise only   M_ev= 6.05±0.22  M_cv= 7.07±2.16  dM=+1.02 [+0.63,+1.48]  P(cv>ev)=0.31 P(=)=0.69  sign p=9.3e-10  MSE ev/cv=0.00065/0.00086 (cv lower in 0.35)
+B3 rough mean + heavy tails M_ev= 6.49±1.81  M_cv=11.87±4.81  dM=+5.38 [+4.45,+6.36]  P(cv>ev)=0.82 P(=)=0.18  sign p=4.1e-25  MSE ev/cv=0.00444/0.00321 (cv lower in 0.66)
+
+===== E3: sample-size sweep (free hyper-parameters; R=100) =====
+E3 rough N=30              M_ev= 6.15±1.46  M_cv= 8.41±2.31  dM=+2.26 [+1.79,+2.75]  P(cv>ev)=0.71 P(=)=0.26  sign p=7.2e-18  MSE ev/cv=0.00517/0.00490 (cv lower in 0.53)
+E3 rough N=60              M_ev= 7.89±1.86  M_cv=11.56±3.39  dM=+3.67 [+2.92,+4.40]  P(cv>ev)=0.73 P(=)=0.24  sign p=1.9e-18  MSE ev/cv=0.00289/0.00258 (cv lower in 0.57)
+E3 rough N=120             M_ev=10.75±2.20  M_cv=16.96±4.81  dM=+6.21 [+5.27,+7.18]  P(cv>ev)=0.92 P(=)=0.08  sign p=4.0e-28  MSE ev/cv=0.00155/0.00130 (cv lower in 0.64)
+E3 rough N=200             M_ev=12.70±2.06  M_cv=21.06±4.33  dM=+8.36 [+7.40,+9.32]  P(cv>ev)=0.97 P(=)=0.03  sign p=1.3e-29  MSE ev/cv=0.00103/0.00082 (cv lower in 0.62)
+E3 rough N=400             M_ev=16.18±2.40  M_cv=24.69±3.20  dM=+8.51 [+7.80,+9.21]  P(cv>ev)=0.98 P(=)=0.02  sign p=6.3e-30  MSE ev/cv=0.00061/0.00043 (cv lower in 0.85)
+E3 in-class N=30           M_ev= 6.01±0.10  M_cv= 6.97±1.41  dM=+0.96 [+0.69,+1.23]  P(cv>ev)=0.45 P(=)=0.55  sign p=5.7e-14  MSE ev/cv=0.00051/0.00090 (cv lower in 0.35)
+E3 in-class N=60           M_ev= 6.00±0.00  M_cv= 7.12±2.20  dM=+1.12 [+0.70,+1.56]  P(cv>ev)=0.35 P(=)=0.65  sign p=5.8e-11  MSE ev/cv=0.00028/0.00040 (cv lower in 0.28)
+E3 in-class N=120          M_ev= 6.01±0.10  M_cv= 7.31±2.59  dM=+1.30 [+0.83,+1.83]  P(cv>ev)=0.38 P(=)=0.62  sign p=7.3e-12  MSE ev/cv=0.00012/0.00015 (cv lower in 0.31)
+E3 in-class N=200          M_ev= 6.00±0.00  M_cv= 7.76±3.77  dM=+1.76 [+1.07,+2.50]  P(cv>ev)=0.36 P(=)=0.64  sign p=2.9e-11  MSE ev/cv=0.00007/0.00009 (cv lower in 0.32)
+E3 in-class N=400          M_ev= 6.00±0.00  M_cv= 7.30±2.60  dM=+1.30 [+0.82,+1.85]  P(cv>ev)=0.39 P(=)=0.61  sign p=3.6e-12  MSE ev/cv=0.00003/0.00005 (cv lower in 0.30)
+
+wrote results/p5_summary.csv, p5_raw.csv, p5_log.txt, figures

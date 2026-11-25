@@ -1,0 +1,165 @@
+=== PART 3: 30 replicate datasets per (dgp, sigma0, N, family); cells show MEDIAN [IQR] ===
+   dgp  sigma0   N family    M    s  noise_sd_hat  mse_in  nll_in  cov_in      mse_ex  nll_ex  cov_ex
+hetero    0.05  20  gauss 25.0 0.25        0.0540  0.0025 -0.9790  0.8764      0.6585  5.0180  0.5488
+hetero    0.05  20   poly  7.0  NaN        0.0649  0.0140 -0.8273  0.8611    448.6955 10.0249  0.2740
+hetero    0.05  60  gauss 15.0 0.25        0.0649  0.0006 -1.2191  0.9125      0.5971  5.5265  0.5403
+hetero    0.05  60   poly  9.0  NaN        0.0649  0.0011 -1.1918  0.9096    293.2875  4.7257  0.4828
+hetero    0.05 200  gauss 11.0 0.25        0.0649  0.0003 -1.2500  0.9248      0.5330  5.0940  0.5192
+hetero    0.05 200   poly  9.0  NaN        0.0649  0.0002 -1.2648  0.9262    317.9641  6.8334  0.2480
+hetero    0.20  20  gauss 27.0 0.25        0.2371  0.0374  0.3594  0.8422      0.7424  2.8247  0.6088
+hetero    0.20  20   poly  5.0  NaN        0.2853  0.1444  0.6309  0.8438     80.3912  6.3535  0.3773
+hetero    0.20  60  gauss 29.0 0.25        0.2371  0.0067  0.1554  0.9217      0.7183  2.8689  0.6307
+hetero    0.20  60   poly  7.0  NaN        0.2612  0.0161  0.1933  0.9166    287.4857  4.9645  0.4278
+hetero    0.20 200  gauss 25.0 0.25        0.2853  0.0033  0.1238  0.9208      0.7213  2.9140  0.6265
+hetero    0.20 200   poly  7.0  NaN        0.2853  0.0055  0.1501  0.9198    298.8480 11.7637  0.2302
+hetero    0.50  20  gauss 28.0 0.25        0.7197  0.1690  1.2164  0.8880      0.6894  1.8540  0.7963
+hetero    0.50  20   poly  2.5  NaN        0.7928  0.3719  1.3764  0.9232      4.3916  3.1731  0.7617
+hetero    0.50  60  gauss 29.0 0.25        0.7197  0.0474  1.0566  0.9250      0.7170  1.8254  0.8080
+hetero    0.50  60   poly  6.0  NaN        0.7197  0.1041  1.1025  0.9308     39.7157  3.8107  0.5803
+hetero    0.50 200  gauss 27.0 0.25        0.6589  0.0137  0.9954  0.9298      0.6742  1.7583  0.8090
+hetero    0.50 200   poly  9.0  NaN        0.7197  0.0325  1.0239  0.9291    393.7498  4.8784  0.5410
+ sharp    0.05  20  gauss 15.0 0.06        0.0540  0.0273  0.2144  0.8329      0.0938  1.3607  0.5228
+ sharp    0.05  20   poly  4.0  NaN        0.3433  0.1207  0.5871  0.9218      0.9112  1.5321  0.7140
+ sharp    0.05  60  gauss 23.0 0.06        0.0540  0.0026 -1.2458  0.9246      0.0929  1.4214  0.4835
+ sharp    0.05  60   poly  6.0  NaN        0.2853  0.0759  0.2136  0.9399      9.0134  2.7689  0.6225
+ sharp    0.05 200  gauss 29.0 0.06        0.0540  0.0005 -1.4999  0.9478      0.0908  1.8703  0.4323
+ sharp    0.05 200   poly 11.0  NaN        0.1971  0.0398 -0.1501  0.9294 106211.5444  9.3798  0.3198
+ sharp    0.20  20  gauss 13.0 0.12        0.2371  0.0783  0.4407  0.8787      0.0998  0.6959  0.8107
+ sharp    0.20  20   poly  2.0  NaN        0.3433  0.1897  0.7404  0.9193      0.9521  1.9099  0.6648
+ sharp    0.20  60  gauss 15.0 0.06        0.1971  0.0179  0.0316  0.9242      0.0931  0.6762  0.7943
+ sharp    0.20  60   poly  4.0  NaN        0.3433  0.0971  0.4291  0.9391      4.0052  3.2079  0.5458
+ sharp    0.20 200  gauss 21.0 0.06        0.1971  0.0057 -0.1086  0.9399      0.0907  0.6852  0.7582
+ sharp    0.20 200   poly  9.0  NaN        0.2853  0.0566  0.2499  0.9374   1827.7130  6.0905  0.4630
+ sharp    0.50  20  gauss 14.0 0.12        0.4971  0.1521  1.0276  0.8759      0.0950  0.9742  0.8758
+ sharp    0.50  20   poly  2.0  NaN        0.5981  0.2447  1.1049  0.9168      0.4196  1.3266  0.8767
+ sharp    0.50  60  gauss 13.0 0.12        0.4971  0.0737  0.8659  0.9446      0.0968  0.9128  0.9293
+ sharp    0.50  60   poly  4.0  NaN        0.5981  0.1195  0.9517  0.9456      1.0265  1.4869  0.8730
+ sharp    0.50 200  gauss 15.0 0.06        0.4971  0.0242  0.7774  0.9412      0.0916  0.9093  0.9140
+ sharp    0.50 200   poly  6.0  NaN        0.5981  0.0773  0.8753  0.9474     13.2621  2.7598  0.6187
+smooth    0.05  20  gauss 25.0 0.25        0.0540  0.0018 -1.3119  0.9310      0.6512  4.7271  0.4927
+smooth    0.05  20   poly  7.0  NaN        0.0649  0.0114 -0.9579  0.8868    344.1698  8.6969  0.2660
+smooth    0.05  60  gauss 11.0 0.25        0.0540  0.0005 -1.4623  0.9419      0.5759  5.7142  0.4833
+smooth    0.05  60   poly  9.0  NaN        0.0540  0.0007 -1.4457  0.9412    312.1738  4.2139  0.5357
+smooth    0.05 200  gauss 11.0 0.25        0.0540  0.0002 -1.5487  0.9534      0.4922  4.9517  0.4473
+smooth    0.05 200   poly  9.0  NaN        0.0540  0.0002 -1.5357  0.9556    314.9899  9.7115  0.1498
+smooth    0.20  20  gauss 27.0 0.25        0.1971  0.0134  0.0611  0.9177      0.7539  2.8522  0.5857
+smooth    0.20  20   poly  5.5  NaN        0.2371  0.1132  0.3674  0.8968    147.1914  5.7403  0.4458
+smooth    0.20  60  gauss 28.0 0.25        0.1971  0.0052 -0.1192  0.9467      0.6861  3.0884  0.5730
+smooth    0.20  60   poly  7.0  NaN        0.1971  0.0133 -0.0627  0.9395    400.4288  6.3050  0.3565
+smooth    0.20 200  gauss 24.0 0.25        0.1971  0.0015 -0.1724  0.9483      0.6539  3.2210  0.5875
+smooth    0.20 200   poly  7.0  NaN        0.1971  0.0033 -0.1618  0.9456    286.5530 17.3771  0.3353
+smooth    0.50  20  gauss 27.0 0.25        0.4971  0.1148  1.0306  0.8544      0.6998  2.0106  0.6778
+smooth    0.50  20   poly  4.0  NaN        0.5981  0.2381  1.1669  0.8902     15.4280  3.9449  0.5988
+smooth    0.50  60  gauss 26.0 0.25        0.4971  0.0237  0.7925  0.9427      0.7030  1.7280  0.7372
+smooth    0.50  60   poly  5.0  NaN        0.4971  0.0678  0.8686  0.9369     41.6403  5.9851  0.3793
+smooth    0.50 200  gauss 26.0 0.25        0.4971  0.0094  0.7532  0.9456      0.6736  1.8148  0.7310
+smooth    0.50 200   poly  8.0  NaN        0.4971  0.0170  0.7736  0.9448    324.3719  5.0907  0.4792
+
+--- Effect of N (median over sigma0 and replicates) ---
+M:
+N               20    60    200
+dgp    family                  
+hetero gauss   26.0  27.0  18.0
+       poly     7.0   7.0   9.0
+sharp  gauss   14.0  21.0  23.0
+       poly     3.0   4.0   9.0
+smooth gauss   27.0  25.0  15.0
+       poly     7.0   7.0   9.0
+mse_in:
+N                 20      60      200
+dgp    family                        
+hetero gauss   0.0374  0.0067  0.0033
+       poly    0.2054  0.0161  0.0055
+sharp  gauss   0.0848  0.0195  0.0057
+       poly    0.1898  0.0977  0.0566
+smooth gauss   0.0189  0.0052  0.0015
+       poly    0.1302  0.0142  0.0033
+nll_in:
+N                 20      60      200
+dgp    family                        
+hetero gauss   0.3972  0.1554  0.1238
+       poly    0.7129  0.1933  0.1501
+sharp  gauss   0.8202  0.0316 -0.1086
+       poly    0.7816  0.4357  0.2499
+smooth gauss   0.0611 -0.1192 -0.1724
+       poly    0.3718 -0.0627 -0.1618
+mse_ex:
+N                   20        60         200
+dgp    family                               
+hetero gauss     0.7013    0.6652     0.6184
+       poly    139.7771  208.8591   308.9455
+sharp  gauss     0.0954    0.0934     0.0908
+       poly      0.7402    3.8749  1745.1536
+smooth gauss     0.6806    0.6781     0.6077
+       poly    157.6687  191.0491   295.9904
+nll_ex:
+N                 20      60      200
+dgp    family                        
+hetero gauss   2.9574  2.6776  2.7861
+       poly    5.2851  4.4078  7.1664
+sharp  gauss   0.9604  0.9319  0.9161
+       poly    1.5706  2.4964  5.9618
+smooth gauss   2.9437  3.0179  3.1856
+       poly    5.7654  5.6503  7.2533
+
+--- Effect of sigma0 (median over N and replicates) ---
+M:
+sigma0         0.05  0.20  0.50
+dgp    family                  
+hetero gauss   13.0  27.0  27.0
+       poly     9.0   7.0   6.0
+sharp  gauss   23.0  21.0  15.0
+       poly     6.0   4.0   4.0
+smooth gauss   13.0  27.0  27.0
+       poly     9.0   7.0   5.5
+mse_in:
+sigma0           0.05    0.20    0.50
+dgp    family                        
+hetero gauss   0.0006  0.0073  0.0490
+       poly    0.0011  0.0167  0.1020
+sharp  gauss   0.0026  0.0179  0.0710
+       poly    0.0759  0.0966  0.1195
+smooth gauss   0.0005  0.0048  0.0274
+       poly    0.0006  0.0133  0.0678
+nll_in:
+sigma0           0.05    0.20    0.50
+dgp    family                        
+hetero gauss  -1.2049  0.1717  1.0676
+       poly   -1.1705  0.2403  1.1045
+sharp  gauss  -1.2458  0.0316  0.8676
+       poly    0.2136  0.4291  0.9517
+smooth gauss  -1.4582 -0.1088  0.8075
+       poly   -1.4401 -0.0627  0.8686
+mse_ex:
+sigma0             0.05      0.20     0.50
+dgp    family                             
+hetero gauss     0.5955    0.7254   0.6898
+       poly    335.7731  243.7848  43.0152
+sharp  gauss     0.0917    0.0927   0.0949
+       poly      9.7855    4.3297   2.0441
+smooth gauss     0.5725    0.6816   0.6992
+       poly    317.0836  283.9257  66.1817
+nll_ex:
+sigma0           0.05    0.20    0.50
+dgp    family                        
+hetero gauss   5.1006  2.8819  1.7932
+       poly    7.0801  6.5765  4.0108
+sharp  gauss   1.5868  0.6792  0.9284
+       poly    3.5711  3.3269  1.9188
+smooth gauss   4.9653  3.0901  1.7909
+       poly    7.7974  6.2575  5.0553
+
+--- Evidence-estimated noise sd vs truth (smooth, sharp: sigma0; hetero: rms of sigma(x) over U[-1,1]) ---
+sigma0=0.05: hetero rms sigma(x)=0.066; N=200 estimated sd -> hetero/gauss:0.065; hetero/poly:0.065; sharp/gauss:0.054; sharp/poly:0.197; smooth/gauss:0.054; smooth/poly:0.054
+sigma0=0.2: hetero rms sigma(x)=0.263; N=200 estimated sd -> hetero/gauss:0.285; hetero/poly:0.285; sharp/gauss:0.197; sharp/poly:0.285; smooth/gauss:0.197; smooth/poly:0.197
+sigma0=0.5: hetero rms sigma(x)=0.657; N=200 estimated sd -> hetero/gauss:0.659; hetero/poly:0.720; sharp/gauss:0.497; sharp/poly:0.598; smooth/gauss:0.497; smooth/poly:0.497
+
+--- Poly vs Gauss: share of replicates where Gaussian wins (lower), by dgp ---
+  mse_in: hetero=0.81, sharp=0.98, smooth=0.83
+  nll_in: hetero=0.74, sharp=0.91, smooth=0.80
+  mse_ex: hetero=1.00, sharp=0.98, smooth=1.00
+  nll_ex: hetero=0.87, sharp=0.92, smooth=0.85
+
+--- Hetero: 95% predictive-interval coverage on left (x<0) vs right (x>0) halves, N=200, sigma0=0.20 ---
+  poly: left coverage=1.00, right coverage=0.81, mean predictive sd left=0.241 (true 0.098), right=0.241 (true 0.352)
+  gauss: left coverage=0.99, right coverage=0.78, mean predictive sd left=0.241 (true 0.098), right=0.242 (true 0.352)

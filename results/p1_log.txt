@@ -1,0 +1,20 @@
+== (a) well-conditioned check (N=40, M=6) ==
+log evidence  brute-force marginal N(0, I/b + PhiPhi'/a): -15.7443481736
+              QR -15.7443481736 | Cholesky -15.7443481736 | SVD-grid -15.7443481736
+max |m_QR - m_ref| = 2.22e-16; max |m_chol - m_ref| = 1.11e-16
+max |mu_QR - mu_ref| = 6.66e-16; max |var_QR - var_ref| = 6.94e-18
+MC predictive at x*=0.00: mean 0.0636 (formula 0.0644), var 0.05485 (formula 0.05479)
+
+== (b) accuracy vs 60-digit reference, monomials, alpha=1e-8 (nearly unregularised), N=60 ==
+  M  cond(Phi) | rel.err m_N:        QR  Cholesky    inv(A) | abs.err log-ev:        QR  Cholesky
+  4   8.96e+00 |                2.4e-16   1.4e-15   2.8e-15 |                   0.0e+00   2.8e-14
+  6   5.31e+01 |                2.5e-16   1.1e-14   4.0e-14 |                   2.8e-14   2.8e-14
+  8   3.11e+02 |                1.8e-14   3.0e-13   4.5e-13 |                   1.4e-14   7.1e-14
+ 10   1.61e+03 |                1.0e-14   7.8e-12   8.9e-12 |                   2.8e-14   1.5e-12
+ 12   1.08e+04 |                1.9e-13   4.8e-10   5.8e-10 |                   8.5e-14   9.3e-11
+ 14   6.67e+04 |                2.1e-12   9.3e-09   1.8e-08 |                   3.7e-13   6.0e-09
+ 16   3.90e+05 |                1.4e-11   2.1e-07   1.1e-07 |                   4.3e-14   3.9e-08
+ 18   2.44e+06 |                1.9e-11   9.5e-07   7.4e-07 |                   2.8e-13   3.8e-07
+ 20   1.45e+07 |                1.8e-11   9.2e-07   8.7e-07 |                   5.4e-13   1.7e-07
+
+== (c) SVD-grid evidence vs QR evidence on Part-2 bases: max |diff| = 2.77e-10 (so the grid searches below are exact) ==

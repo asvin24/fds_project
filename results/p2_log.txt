@@ -1,0 +1,39 @@
+=== MAIN DATASET (seed 42, N=60, sigma=0.20, beta_true=25) ===
+[poly] Evidence : M= 9 s=None alpha=6.31e-04 beta=31.6 logEv=-22.89 | test MSE=0.01844
+[poly] CV fixed : M=11 s=None (alpha0=0.01, beta0=25.0) CV-MSE=0.0551 | test MSE=0.02369
+[poly] CV tuned : M= 9 s=None lambda=6.31e-05 CV-MSE=0.0439 | test MSE=0.01496
+[gauss] Evidence : M=25 s=0.15 alpha=6.31e+00 beta=50.1 logEv=7.72 | test MSE=0.00597
+[gauss] CV fixed : M=11 s=0.15 (alpha0=0.01, beta0=25.0) CV-MSE=0.0241 | test MSE=0.00697
+[gauss] CV tuned : M=11 s=0.15 lambda=6.31e-04 CV-MSE=0.0241 | test MSE=0.00681
+Gaussian evidence optimum: M=25, s=0.15, spacing Delta_mu=2/(M-2)=0.087, s/Delta_mu=1.73
+
+Poly: evidence-estimated beta per M (true 25):  M=1:1.6, M=2:4.0, M=3:4.0, M=4:7.9, M=5:10.0, M=6:10.0, M=7:12.6, M=8:12.6, M=9:31.6, M=10:31.6, M=11:31.6, M=12:31.6, M=13:25.1, M=14:25.1, M=15:39.8, M=16:39.8
+
+Condition numbers on the training inputs:
+  poly M=8: kappa=2.80e+02
+  poly M=12: kappa=1.06e+04
+  poly M=15: kappa=1.56e+05
+  poly M=16: kappa=3.85e+05
+  gauss M=15, s=0.25: kappa=6.14e+04
+  gauss M=25, s=0.25: kappa=6.58e+12
+  gauss M=25, s=0.65: kappa=1.66e+17
+
+Predictive std at x in [-1.5..1.5] for the evidence-selected models (shows variance behaviour outside data):
+   poly: x=[-1.5 -1.  -0.5  0.   0.5  1.   1.5] mu=[ 3.449e+02 -3.300e-01 -1.160e+00  2.300e-01  8.800e-01  5.600e-01
+  4.319e+02] sd=[53.52  0.29  0.19  0.19  0.18  0.41 66.61]; beta^-1/2=0.178, alpha^-1/2=39.8
+  gauss: x=[-1.5 -1.  -0.5  0.   0.5  1.   1.5] mu=[-0.09 -0.59 -1.08  0.4   0.92 -0.28 -0.09] sd=[0.28 0.18 0.16 0.16 0.15 0.18 0.28]; beta^-1/2=0.141, alpha^-1/2=0.4
+
+=== REPLICATES: 30 datasets (seeds 0..29) ===
+                  M_median  M_q25  M_q75  mse_median  mse_q25  mse_q75
+family criterion                                                      
+gauss  cv_fixed        8.0    8.0  10.00     0.00891  0.00580  0.01234
+       cv_tuned       10.0    8.0  12.00     0.00860  0.00612  0.01020
+       evidence        8.0    8.0  11.00     0.00740  0.00576  0.00879
+poly   cv_fixed       11.0   11.0  13.75     0.03322  0.02553  0.05580
+       cv_tuned       11.0   11.0  13.75     0.01679  0.00906  0.05595
+       evidence        7.0    7.0   9.00     0.06488  0.05893  0.07574
+
+Share of datasets where each criterion gives the lowest test MSE within a family:
+  poly: cv_fixed=0.13, cv_tuned=0.77, evidence=0.10
+  gauss: cv_fixed=0.23, cv_tuned=0.33, evidence=0.43
+Gaussian test-MSE < poly test-MSE (per criterion, share of datasets): evidence=1.00, cv_fixed=1.00, cv_tuned=0.87
